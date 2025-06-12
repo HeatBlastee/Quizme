@@ -4,6 +4,34 @@ import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 import levenshtein from "js-levenshtein";
 
+function hybridSimilarity(correct: string, user: string): number {
+    correct = correct.toLowerCase().trim();
+    user = user.toLowerCase().trim();
+
+    // Levenshtein similarity
+    const levDistance = levenshtein(correct, user);
+    const levSim = 1 - levDistance / Math.max(correct.length, user.length);
+
+    // Dice coefficient
+    const bigrams = (str: string) => {
+        const pairs = new Set<string>();
+        for (let i = 0; i < str.length - 1; i++) {
+            pairs.add(str.slice(i, i + 2));
+        }
+        return pairs;
+    };
+
+    const set1 = bigrams(correct);
+    const set2 = bigrams(user);
+    const intersection = [...set1].filter(b => set2.has(b)).length;
+    const diceSim = (2 * intersection) / (set1.size + set2.size || 1);
+
+    // Final score: weighted average (you can tune weights)
+    const finalScore = (0.6 * levSim + 0.4 * diceSim) * 100;
+
+    return Math.round(Math.max(0, Math.min(finalScore, 100)));
+}
+
 export async function POST(req: Request) {
     try {
         const body = await req.json();
@@ -23,19 +51,16 @@ export async function POST(req: Request) {
         });
 
         if (question.questionType === "mcq") {
-            const isCorrect = question.answer.toLowerCase().trim() === userInput.toLowerCase().trim();
+            const isCorrect =
+                question.answer.toLowerCase().trim() === userInput.toLowerCase().trim();
             await prisma.question.update({
                 where: { id: questionId },
                 data: { isCorrect },
             });
             return NextResponse.json({ isCorrect });
         } else if (question.questionType === "open_ended") {
-            const correct = question.answer.toLowerCase().trim();
-            const user = userInput.toLowerCase().trim();
-            const distance = levenshtein(correct, user);
-            const maxLen = Math.max(correct.length, user.length);
-            const percentageSimilar = Math.max(0, Math.round((1 - distance / maxLen) * 100));
-            console.log(percentageSimilar)
+            const percentageSimilar = hybridSimilarity(question.answer, userInput);
+
             await prisma.question.update({
                 where: { id: questionId },
                 data: { percentageCorrect: percentageSimilar },

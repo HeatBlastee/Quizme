@@ -31,6 +31,7 @@ const OpenEnded = ({ game }: Props) => {
     const [blankAnswer, setBlankAnswer] = React.useState("");
     const [averagePercentage, setAveragePercentage] = React.useState(0);
     const [now, setNow] = React.useState(new Date());
+    const [startTime, setStartTime] = React.useState<Date | null>(null);
 
     const currentQuestion = React.useMemo(() => {
         return game.questions[questionIndex];
@@ -66,13 +67,21 @@ const OpenEnded = ({ game }: Props) => {
     });
 
     React.useEffect(() => {
-        if (!hasEnded) {
+        if (!startTime) {
+            const initial = new Date();
+            setStartTime(initial);
+            setNow(initial);
+        }
+    }, [startTime]);
+
+    React.useEffect(() => {
+        if (!hasEnded && startTime) {
             const interval = setInterval(() => {
                 setNow(new Date());
             }, 1000);
             return () => clearInterval(interval);
         }
-    }, [hasEnded]);
+    }, [hasEnded, startTime]);
 
     const handleNext = React.useCallback(() => {
         checkAnswer(undefined, {
@@ -89,6 +98,7 @@ const OpenEnded = ({ game }: Props) => {
                     return;
                 }
                 setQuestionIndex((prev) => prev + 1);
+                setBlankAnswer("");
             },
             onError: (error) => {
                 console.error(error);
@@ -114,7 +124,7 @@ const OpenEnded = ({ game }: Props) => {
             <div className="absolute flex flex-col justify-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 <div className="px-4 py-2 mt-2 font-semibold text-white bg-green-500 rounded-md whitespace-nowrap">
                     You Completed in{" "}
-                    {formatTimeDelta(differenceInSeconds(now, game.timeStarted))}
+                    {startTime && formatTimeDelta(differenceInSeconds(now, startTime))}
                 </div>
                 <Link
                     href={`/statistics/${game.id}`}
@@ -139,7 +149,7 @@ const OpenEnded = ({ game }: Props) => {
                     </p>
                     <div className="flex self-start mt-3 text-slate-400">
                         <Timer className="mr-2" />
-                        {formatTimeDelta(differenceInSeconds(now, game.timeStarted))}
+                        {startTime && formatTimeDelta(differenceInSeconds(now, startTime))}
                     </div>
                 </div>
                 <OpenEndedPercentage percentage={averagePercentage} />
