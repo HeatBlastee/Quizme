@@ -1,7 +1,7 @@
-Quizme 🎯
+Quizmify 🎯
 A smart and interactive quiz platform built with Next.js, ShadCN UI, PostgreSQL, Prisma, and AI integration.
 
-🔗 Live Demo: 
+🔗 Live Demo: https://quizzzme.vercel.app/
 
 🚀 Features
 🧠 AI-powered question generation (MCQ & Open-ended)
@@ -34,37 +34,33 @@ AI & Utilities: OpenAI / Azure AI API (for question generation), string-similari
 📦 Installation & Setup
 1. Clone the Repository
 bash
-Copy code
+Copy
+Edit
 git clone https://github.com/your-username/quizme.git
-cd quizmify
+cd quizme
 2. Install Dependencies
 bash
-Copy code
+Copy
+Edit
 npm install
 3. Configure Environment Variables
 Create a .env file at the root and add the following:
 
 env
-Copy code
-DATABASE_URL=postgresql://<user>:<password>@<host>:<port>/<db_name>
 DATABASE_URL=
 GOOGLE_CLIENT_ID = 
-GOOGLE_CLIENT_SECRET = 
+GOOGLE_CLIENT_SECRET =
 NEXTAUTH_SECRET = 
-OPENAI_API_KEY = 
-GITHUB_TOKEN =
+OPENAI_API_KEY =
+GITHUB_TOKEN = 
 API_URL = "http://localhost:3000"
 
+
 4. Set Up the Database
-bash
-Copy code
 npx prisma generate
 npx prisma db push
-(Optional: Use npx prisma studio to open Prisma GUI)
 
 🧪 Run Locally
-bash
-Copy code
 npm run dev
 App will be running at http://localhost:3000
 
@@ -116,7 +112,8 @@ Styled with TailwindCSS and responsive design principles.
 
 🧩 Folder Structure (Simplified)
 pgsql
-Copy code
+Copy
+Edit
 /app
   /dashboard     --> Protected routes & components
   /api           --> Quiz APIs, Auth, Answer Checkers
@@ -139,9 +136,5 @@ Add explanation for answers
 🤝 Contributing
 Pull requests and stars are welcome!
 
-bash
-Copy code
 # Format code before PR
 npm run lint
-📄 License
-MIT © 2025 Mann Patel
