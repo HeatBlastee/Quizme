@@ -39,8 +39,8 @@ const DetailsDialog = () => {
                             <div className="grid justify-around grid-cols-4 mt-2 gap-y-3">
                                 <div className="flex items-center gap-2">
                                     <Image
-                                        alt="planetscale"
-                                        src="/planetscale.png"
+                                        alt="Neon Db"
+                                        src="/neondb.jpg"
                                         width={35}
                                         height={35}
                                     />
