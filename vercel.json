@@ -1,6 +1,6 @@
 {
   "functions": {
-    "app/api/questions/route.ts": {
+    "src/app/api/questions/route.ts": {
       "maxDuration": 60
     }
   }
