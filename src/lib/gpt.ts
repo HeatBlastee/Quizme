@@ -36,8 +36,8 @@ export async function strict_output(
     default_category = "",
     output_value_only = false,
     model = "openai/gpt-4.1",      // change to gpt-3.5 for more free calls
-    temperature = 0.7,             // slightly lower => more deterministic JSON
-    num_tries = 3,
+    temperature = 0.4,             // slightly lower => more deterministic JSON
+    num_tries = 1,
     verbose = false
 ): Promise<QA[]> {
 
@@ -68,7 +68,7 @@ export async function strict_output(
                 model,
                 temperature,
                 top_p: 1,
-                max_tokens: 800,
+                max_tokens: 500,
                 frequency_penalty: 0,
                 presence_penalty: 0,
                 messages: [
