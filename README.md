@@ -1,140 +1,131 @@
-Quizmify 🎯
-A smart and interactive quiz platform built with Next.js, ShadCN UI, PostgreSQL, Prisma, and AI integration.
+# 🎯 QuizMe
 
-🔗 Live Demo: https://quizzzme.vercel.app/
+**QuizMe** is a modern quiz web application designed to make learning interactive and engaging. Users can take quizzes, get instant results, and improve their knowledge across various topics. Ideal for students, educators, and knowledge enthusiasts!
 
-🚀 Features
-🧠 AI-powered question generation (MCQ & Open-ended)
+---
 
-✅ Auto-answer checking using string similarity algorithms
+## 🚀 Features
 
-📚 Topics-based quiz system
+- 📝 Create and manage quizzes  
+- 🧠 Attempt quizzes and get instant feedback  
+- 📊 See performance analytics  
+- 👨‍🏫 Role-based access (Admin/User)  
+- 🌐 Responsive UI for all devices  
+- 🔐 Authentication & Authorization  
+- 💾 Persistent storage of quiz data and scores  
 
-🕒 Recent activity tracking
+---
 
-📈 Performance history and stats
+## 🛠️ Tech Stack
 
-🎨 Beautiful UI with responsive design using ShadCN UI + Tailwind CSS
+**Frontend:**
+- React.js  
+- Tailwind CSS  
+- Axios  
 
-🔐 Auth with Google OAuth via NextAuth.js
+**Backend:**
+- Node.js  
+- Express.js  
+- MongoDB (Mongoose)  
 
-🔒 Secure routes with server-side session handling
+**Authentication:**
+- JWT-based authentication  
+- bcrypt password hashing  
 
-📦 Prisma ORM with PostgreSQL
+---
 
-🛠️ Tech Stack
-Frontend: Next.js 14 (App Router), TypeScript, TailwindCSS, ShadCN UI
+## 📦 Installation
 
-Backend: Next.js API Routes, Prisma ORM, PostgreSQL
+```bash
+# Clone the repo
+git clone https://github.com/HeatBlastee/QuizMe.git
+cd QuizMe
 
-Auth: NextAuth.js (Google OAuth)
-
-AI & Utilities: OpenAI / Azure AI API (for question generation), string-similarity for answer checking
-
-📦 Installation & Setup
-1. Clone the Repository
-bash
-Copy
-Edit
-git clone https://github.com/your-username/quizme.git
-cd quizme
-2. Install Dependencies
-bash
-Copy
-Edit
+# Install frontend & backend dependencies
+cd client
 npm install
-3. Configure Environment Variables
-Create a .env file at the root and add the following:
+cd ../server
+npm install
+```
 
-env
-DATABASE_URL=
-GOOGLE_CLIENT_ID = 
-GOOGLE_CLIENT_SECRET =
-NEXTAUTH_SECRET = 
-OPENAI_API_KEY =
-GITHUB_TOKEN = 
-API_URL = "http://localhost:3000"
+---
 
+## ▶️ Usage
 
-4. Set Up the Database
-npx prisma generate
-npx prisma db push
+1. **Start Backend Server**
+   ```bash
+   cd server
+   npm start
+   ```
 
-🧪 Run Locally
-npm run dev
-App will be running at http://localhost:3000
+2. **Start Frontend**
+   ```bash
+   cd client
+   npm run dev
+   ```
 
-🧠 How It Works
-User Authentication
+3. Open your browser and visit:  
+   `http://localhost:5173` (or the appropriate port)
 
-Users can log in with their Google accounts using NextAuth.js.
+---
 
-Quiz Dashboard
+## 🧪 Sample Credentials
 
-After login, users land on the dashboard where they can:
+> _(Optional - for testing/demo purposes)_
 
-View recent activity
+**Admin**  
+Email: `admin@quizme.com`  
+Password: `admin123`  
 
-Take topic-based quizzes
+**User**  
+Email: `user@quizme.com`  
+Password: `user123`  
 
-Track performance stats
+---
 
-Quiz Generation
+## 📂 Folder Structure
 
-When the user clicks "Quiz Me", AI-generated questions are fetched via API routes using Azure OpenAI / OpenAI's API.
+```
+QuizMe/
+├── client/         # Frontend (React)
+├── server/         # Backend (Node/Express)
+└── README.md
+```
 
-Both multiple-choice and open-ended questions are supported.
+---
 
-Answer Checking
+## 🛡️ Security
 
-Open-ended answers are checked using fuzzy string matching (like compareTwoStrings).
+- Passwords hashed with bcrypt  
+- JWT for token-based authentication  
+- Input validation on both frontend and backend  
 
-MCQs are checked by comparing selected options.
+---
 
-History Tracking
+## 📈 Future Enhancements
 
-User quiz attempts and scores are stored and displayed on the dashboard using PostgreSQL and Prisma.
+- Timer-based quizzes ⏱️  
+- Leaderboards 🏆  
+- Quiz sharing via public links 🔗  
+- Mobile application version 📱  
 
-🖼️ UI Components
-Built using ShadCN UI components like:
+---
 
-Dialogs
+## 🤝 Contributing
 
-Cards
+Contributions are welcome! Feel free to open issues, submit pull requests, or suggest new features.
 
-Buttons
+---
 
-Tabs
+## 📬 Contact
 
-Toasts
+**Mann Patel**  
+📧 [mann110406@gmail.com](mailto:mann110406@gmail.com)  
+🔗 [GitHub](https://github.com/HeatBlastee)  
+🔗 [LinkedIn](https://www.linkedin.com/in/mann-patel-321aa8289/)  
 
-Styled with TailwindCSS and responsive design principles.
+---
 
-🧩 Folder Structure (Simplified)
-pgsql
-Copy
-Edit
-/app
-  /dashboard     --> Protected routes & components
-  /api           --> Quiz APIs, Auth, Answer Checkers
-/components      --> UI Reusable Components
-/lib             --> Utility functions and NextAuth setup
-/prisma          --> Prisma schema & migration files
-/schemas         --> Zod schemas for validation
-/types           --> TypeScript types
-📈 Future Improvements
-Add user leaderboard
+## ⭐️ Show Your Support
 
-Enable custom question creation
-
-Integrate timed quizzes
-
-Add support for more languages and subjects
-
-Add explanation for answers
-
-🤝 Contributing
-Pull requests and stars are welcome!
-
-# Format code before PR
-npm run lint
+If you like the project, consider starring ⭐ the repository or sharing it with your network!
